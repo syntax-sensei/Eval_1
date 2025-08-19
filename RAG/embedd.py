@@ -14,5 +14,5 @@ vector_store = Chroma(
     persist_directory="./excercise",
 )
 
-if not os.path_exist(./)
+
 

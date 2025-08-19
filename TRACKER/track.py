@@ -10,8 +10,8 @@ app = FastAPI()
 
 
 class Macro_tags(str, Enum):
-    protein = "items"
-    carbs = "users"
+    protein = "protein"
+    carbs = "carbs"
     fats = "fats"
 
 
@@ -26,7 +26,7 @@ class Track(BaseModel):
 
 class Nutrition(BaseModel):
     user_id: int
-    date: datetime.time
+    date: str
     meals: list[str] = []
     calories: int 
     macronutrients: Macro_tags
@@ -62,11 +62,13 @@ def register(track: Track, session: SessionDep) -> Track:
     return track
 
 @app.post("/diet/")
-def register(nutrition: Nutrition, session: SessionDep) -> Track:
-    session.add(track)
+def register(nutrition: Nutrition, session: SessionDep) -> Nutrition:
+    session.add(nutrition)
     session.commit()
-    session.refresh(track)
-    return track
+    session.refresh(nutrition)
+    return nutrition
+
+
 
 
 
