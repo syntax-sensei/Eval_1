@@ -27,7 +27,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/workouts/")
-def register(track: Track) -> Track:
+def register(request: Workout, db: Session = Depends(get_db)):
     db.add(track)
     db.commit()
     db.refresh(track)
@@ -39,6 +39,8 @@ def register(nutrition: Nutrition) -> Nutrition:
     db.commit()
     db.refresh(nutrition)
     return nutrition
+
+
 
 
 
